@@ -1,1 +1,1 @@
-# ddd-workshops
+# workshops
