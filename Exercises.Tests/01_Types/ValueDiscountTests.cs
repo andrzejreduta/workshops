@@ -1,3 +1,4 @@
+using System.Globalization;
 using FluentAssertions;
 using Xunit;
 
@@ -11,10 +12,10 @@ namespace Exercises._01_Types
         [InlineData("0", "10", "-10")]
         public void DiscountReducesPriceByCertainAmount(string price, string discountValue, string discountedPrice)
         {
-            var pricingPolicy = CreateTestedPolicy(decimal.Parse(discountValue));
+            var pricingPolicy = CreateTestedPolicy(decimal.Parse(discountValue, CultureInfo.InvariantCulture));
 
-            pricingPolicy.Apply(Money.Of(decimal.Parse(price), Currency.PLN))
-                .Should().Be(Money.Of(decimal.Parse(discountedPrice), Currency.PLN));
+            pricingPolicy.Apply(Money.Of(decimal.Parse(price, CultureInfo.InvariantCulture), Currency.PLN))
+                .Should().Be(Money.Of(decimal.Parse(discountedPrice, CultureInfo.InvariantCulture), Currency.PLN));
         }
 
         private static IPricingPolicy CreateTestedPolicy(decimal discountValue)

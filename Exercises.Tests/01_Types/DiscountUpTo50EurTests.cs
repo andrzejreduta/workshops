@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Reflection;
 using FluentAssertions;
 using Xunit;
@@ -15,9 +16,9 @@ namespace Exercises._01_Types
         public void DiscountIsAppliedForPricesUpTo50Eur(string value, string discountedValue)
         {
             var pricingPolicy = CreateTestedPolicy();
-            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value), Currency.EUR));
+            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value, CultureInfo.InvariantCulture), Currency.EUR));
 
-            discountedPrice.Value.Should().Be(decimal.Parse(discountedValue));
+            discountedPrice.Value.Should().Be(decimal.Parse(discountedValue, CultureInfo.InvariantCulture));
         }
 
         [Theory]
@@ -27,9 +28,9 @@ namespace Exercises._01_Types
         public void DiscountIsNotAppliedForPricesOver50Eur(string value)
         {
             var pricingPolicy = CreateTestedPolicy();
-            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value), Currency.EUR));
+            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value, CultureInfo.InvariantCulture), Currency.EUR));
 
-            discountedPrice.Value.Should().Be(decimal.Parse(value));
+            discountedPrice.Value.Should().Be(decimal.Parse(value, CultureInfo.InvariantCulture));
         }
 
         [Theory]
@@ -44,9 +45,9 @@ namespace Exercises._01_Types
         public void DiscountIsNotAppliedForPricesInPlnOrUsd(string value, Currency currency)
         {
             var pricingPolicy = CreateTestedPolicy();
-            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value), currency));
+            var discountedPrice = pricingPolicy.Apply(Money.Of(decimal.Parse(value, CultureInfo.InvariantCulture), currency));
 
-            discountedPrice.Value.Should().Be(decimal.Parse(value));
+            discountedPrice.Value.Should().Be(decimal.Parse(value, CultureInfo.InvariantCulture));
         }
 
         private static IPricingPolicy CreateTestedPolicy()
