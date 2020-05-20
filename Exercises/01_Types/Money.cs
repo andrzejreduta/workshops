@@ -2,9 +2,9 @@ using System;
 
 namespace Exercises._01_Types
 {
-    public struct Money
+    public readonly struct Money
     {
-        public decimal Value { get; private set; }
+        public decimal Value { get; }
         public Currency Currency { get; }
 
         public static Money Zero(Currency currency) => new Money(0, currency);
@@ -17,13 +17,14 @@ namespace Exercises._01_Types
             Currency = currency;
         }
 
-        public void Add(Money other)
+        public Money Add(Money other)
         {
             CheckCurrencies(this, other);
-            Value += other.Value;
+            return Money.Of(Value + other.Value, Currency);
         }
 
         public static Money operator *(Money money, decimal multiplier) => Of(money.Value * multiplier, money.Currency);
+        public static Money operator +(Money x, Money y) => x.Add(y);
 
         private static void CheckCurrencies(Money x, Money y)
         {
