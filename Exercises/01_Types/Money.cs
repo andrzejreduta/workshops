@@ -8,7 +8,7 @@ namespace Exercises._01_Types
         public Currency Currency { get; }
 
         public static Money Zero(Currency currency) => new Money(0, currency);
-        
+
         public static Money Of(decimal value, Currency currency) => new Money(value, currency);
 
         private Money(decimal value, Currency currency)

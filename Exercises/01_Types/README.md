@@ -19,7 +19,7 @@ Znajdź błąd w implementacji `Offer`, który powoduje, że `TotalPrice` jest �
 Zaproponuj w jaki sposób można poprawić implementację.
 
 ## Operatory
-Zaimplementuj operator dodawania w klasie `Money`.
+Zaimplementuj operator dodawania w strukturze `Money`.
 
 ## Operacja na stringach
 Zaimplementuj metodę `ToString` w klasie `Offer`, która zwróci tekst opisujący zawartość oferty.
