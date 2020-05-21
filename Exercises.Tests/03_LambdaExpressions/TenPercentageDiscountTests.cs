@@ -1,5 +1,6 @@
 using System;
 using Exercises._01_Types;
+using FluentAssertions;
 using Xunit;
 
 namespace Exercises._03_LambdaExpressions
@@ -12,13 +13,12 @@ namespace Exercises._03_LambdaExpressions
         [InlineData("25", "22.5")]
         public void TenPercentageDiscountExists(string price, string discountedPrice)
         {
-            throw new AggregateException("Test is not implemented");
-            // var pricingPolicy = (PricingPolicy) Delegate.CreateDelegate(
-            //     typeof(PricingPolicy), 
-            //     typeof(PricingPolicies), 
-            //     "TenPercentageDiscount");
-            // pricingPolicy(Money.Of(decimal.Parse(price), Currency.PLN))
-            //     .Should().Be(Money.Of(decimal.Parse(discountedPrice), Currency.PLN));
+            var pricingPolicy = (PricingPolicy) Delegate.CreateDelegate(
+                typeof(PricingPolicy), 
+                typeof(PricingPolicies), 
+                "TenPercentageDiscount");
+            pricingPolicy(Money.Of(decimal.Parse(price), Currency.PLN))
+                .Should().Be(Money.Of(decimal.Parse(discountedPrice), Currency.PLN));
         }
     }
 }

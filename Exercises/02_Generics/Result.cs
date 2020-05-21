@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Exercises._01_Types;
 
 namespace Exercises._02_Generics

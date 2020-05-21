@@ -24,6 +24,7 @@ namespace Exercises._01_Types
         }
 
         public static Money operator *(Money money, decimal multiplier) => Of(money.Value * multiplier, money.Currency);
+        public static Money operator *(Money money, double multiplier) => Of(money.Value * (decimal) multiplier, money.Currency);
         public static Money operator +(Money x, Money y) => x.Add(y);
 
         private static void CheckCurrencies(Money x, Money y)
