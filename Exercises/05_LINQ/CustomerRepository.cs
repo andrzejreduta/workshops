@@ -19,7 +19,7 @@ namespace Exercises._05_LINQ
             .Take(3)
             .Select(customer => customer.Name);
         
-        public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw(Expression<Func<Customer, bool>> predicate) => _dbContext.Customers
+        public IEnumerable<string> GetThreeRecentlyAddedCustomers(Expression<Func<Customer, bool>> predicate) => _dbContext.Customers
             .Where(predicate)
             .OrderByDescending(customer => customer.AddedOn)
             .Take(3)

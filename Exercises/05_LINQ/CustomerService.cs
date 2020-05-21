@@ -18,7 +18,7 @@ namespace Exercises._05_LINQ
             .Select(customer => customer.Name);
 
         public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw2() => _customerRepository
-            .GetThreeRecentlyAddedCustomersFromWarsaw(customer =>
-                customer.Address.City.Equals("Warszawa", StringComparison.InvariantCultureIgnoreCase));
+            .GetThreeRecentlyAddedCustomers(customer =>
+                customer.Address.City.Equals("Poznań", StringComparison.InvariantCultureIgnoreCase));
     }
 }
