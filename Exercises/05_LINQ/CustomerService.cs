@@ -16,5 +16,9 @@ namespace Exercises._05_LINQ
             .OrderByDescending(customer => customer.AddedOn)
             .Take(3)
             .Select(customer => customer.Name);
+
+        public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw2() => _customerRepository
+            .GetThreeRecentlyAddedCustomersFromWarsaw(customer =>
+                customer.Address.City.Equals("Warszawa", StringComparison.InvariantCultureIgnoreCase));
     }
 }

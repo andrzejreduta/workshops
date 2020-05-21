@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Exercises._05_LINQ
 {
@@ -14,6 +15,12 @@ namespace Exercises._05_LINQ
         
         public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw() => _dbContext.Customers
             .Where(customer => customer.Address.City.Equals("Warszawa", StringComparison.InvariantCultureIgnoreCase))
+            .OrderByDescending(customer => customer.AddedOn)
+            .Take(3)
+            .Select(customer => customer.Name);
+        
+        public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw(Expression<Func<Customer, bool>> predicate) => _dbContext.Customers
+            .Where(predicate)
             .OrderByDescending(customer => customer.AddedOn)
             .Take(3)
             .Select(customer => customer.Name);
