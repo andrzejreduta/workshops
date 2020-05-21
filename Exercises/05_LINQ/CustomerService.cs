@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises._05_LINQ
 {
@@ -9,9 +10,11 @@ namespace Exercises._05_LINQ
 
         public CustomerService(CustomerRepository customerRepository) => _customerRepository = customerRepository;
 
-        public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<string> GetThreeRecentlyAddedCustomersFromWarsaw() => _customerRepository
+            .GetAll()
+            .Where(customer => customer.Address.City.Equals("Warszawa", StringComparison.InvariantCultureIgnoreCase))
+            .OrderByDescending(customer => customer.AddedOn)
+            .Take(3)
+            .Select(customer => customer.Name);
     }
 }
