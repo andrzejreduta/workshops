@@ -16,7 +16,28 @@ namespace Exercises._08_Exceptions
 
         public Result Handle(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var order = _repository.GetBy(id);
+                order.Cancel();
+                _repository.Save(order);
+                return Result.Success;
+            }
+            catch (RecordNotFoundException)
+            {
+                _logger.Log(LogLevel.Warning, $"Missing order with id: {id}");
+                return Result.Failure;
+            }
+            catch (DbUnavailableException dbUnavailableException)
+            {
+                _logger.Log(LogLevel.Error, dbUnavailableException, "Db is unavailable");
+                return Result.Failure;
+            }
+            catch (Exception unexpectedException)
+            {
+                _logger.Log(LogLevel.Critical, unexpectedException, $"Bug in the code!!!");
+                return Result.Failure;
+            }
         }
     }
 }

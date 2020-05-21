@@ -10,7 +10,18 @@ namespace Exercises._08_Exceptions
 
         public Order GetBy(Guid id)
         {
-            throw new NotImplementedException();
+            for (var i = 0; i <= 4; i++)
+            {
+                try
+                {
+                    return _db.Get<Order>(id);
+                }
+                catch (DbUnavailableException e)
+                {
+                    continue;
+                }
+            }
+            throw new DbUnavailableException();
         }
 
         public void Save(Order order) => _db.Save(order);
