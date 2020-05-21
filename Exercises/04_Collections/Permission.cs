@@ -2,8 +2,8 @@ namespace Exercises._04_Collections
 {
     public class Permission
     {
-        public string Core { get; }
+        public string Code { get; }
 
-        public Permission(string code) => Core = code;
+        public Permission(string code) => Code = code;
     }
 }
