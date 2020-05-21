@@ -1,14 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Exercises._01_Types
 {
-    public class Offer
+    public class Offer : IEnumerable<(ProductId ProductId, Money Price)>
     {
         private readonly List<(ProductId ProductId, Money Price)> _items =
             new List<(ProductId ProductId, Money Price)>();
 
-        public IEnumerable<(ProductId ProductId, Money Price)> Items => _items;
+        public IEnumerable<(ProductId ProductId, Money Price)> Items => _items.AsReadOnly();
         
         public Money TotalPrice { get; private set; }
         
@@ -22,6 +23,8 @@ namespace Exercises._01_Types
             TotalPrice += price;
         }
 
+        public IEnumerator<(ProductId ProductId, Money Price)> GetEnumerator() => _items.GetEnumerator();
+
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -31,5 +34,7 @@ namespace Exercises._01_Types
             }
             return builder.ToString();
         }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

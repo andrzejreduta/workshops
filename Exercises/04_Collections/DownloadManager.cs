@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Exercises._04_Collections
@@ -11,12 +12,25 @@ namespace Exercises._04_Collections
             if (_downloadsCount >= 5)
                 throw new DomainException();
 
-            yield return new File();
-            yield return new File();
-            yield return new File();
-            yield return new File();
-            yield return new File();
             _downloadsCount++;
+            return GetFiles();
+            // return new[]
+            // {
+            //     new File(),
+            //     new File(),
+            //     new File(),
+            //     new File(),
+            //     new File()
+            // };
+        }
+
+        private IEnumerable<File> GetFiles()
+        {
+            yield return new File();
+            yield return new File();
+            yield return new File();
+            yield return new File();
+            yield return new File();
         }
     }
 }
